@@ -19,6 +19,7 @@ Python 3.10+, сторонние библиотеки не нужны.
 
 ## Запуск
 
+В Linux вместо `python` используйте `python3` (или установите пакет `python-is-python3`).
 Ассемблер (на этапе 1 режим `--test` печатает поля команд):
 
     python -m uvm.assembler examples/spec_tests.asm out.bin --test
