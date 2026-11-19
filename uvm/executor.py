@@ -2,6 +2,7 @@
 
 from typing import Callable
 
+from uvm.alu import rotate_right
 from uvm.decoder import decode_command
 from uvm.errors import ExecutionError
 from uvm.machine import Machine
@@ -11,9 +12,12 @@ from uvm.spec import (
     LOAD_CONST_C,
     OPCODE_LOAD_CONST,
     OPCODE_READ,
+    OPCODE_ROR,
     OPCODE_WRITE,
     READ_B,
     READ_C,
+    ROR_B,
+    ROR_C,
     WRITE_B,
     WRITE_C,
 )
@@ -36,10 +40,17 @@ def execute_write(machine: Machine, values: dict[str, int]) -> None:
     machine.data_memory.write(address, value)
 
 
+def execute_ror(machine: Machine, values: dict[str, int]) -> None:
+    value = machine.registers.read(values[ROR_B.name])
+    shift = machine.data_memory.read(values[ROR_C.name])
+    machine.registers.write(values[ROR_B.name], rotate_right(value, shift))
+
+
 HANDLERS: dict[int, Handler] = {
     OPCODE_LOAD_CONST: execute_load_const,
     OPCODE_READ: execute_read,
     OPCODE_WRITE: execute_write,
+    OPCODE_ROR: execute_ror,
 }
 
 
