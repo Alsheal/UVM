@@ -104,3 +104,4 @@ ROR = CommandSpec(
 
 COMMANDS = (LOAD_CONST, READ, WRITE, ROR)
 COMMANDS_BY_MNEMONIC = {command.mnemonic: command for command in COMMANDS}
+COMMANDS_BY_OPCODE = {command.opcode: command for command in COMMANDS}
