@@ -15,6 +15,7 @@ from uvm.parser import parse_program
 
 ROOT_DIRECTORY = Path(__file__).resolve().parent.parent
 DEMO_PATH = ROOT_DIRECTORY / "examples" / "ror_demo.asm"
+FILE_ENCODING = "utf-8"
 
 RESULT_FIRST = 20
 RESULT_LAST = 21
