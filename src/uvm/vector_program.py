@@ -12,7 +12,8 @@ REGISTER_VALUE = 1
 REGISTER_ELEMENT = 2
 REGISTER_RESULT_ADDRESS = 3
 
-EXAMPLES_DIRECTORY = Path(__file__).resolve().parent.parent / "examples"
+ROOT_DIRECTORY = Path(__file__).resolve().parents[2]
+EXAMPLES_DIRECTORY = ROOT_DIRECTORY / "examples"
 FILE_NAME_TEMPLATE = "vector_ror_{number}.asm"
 FILE_ENCODING = "utf-8"
 

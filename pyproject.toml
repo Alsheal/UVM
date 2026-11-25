@@ -14,4 +14,5 @@ uvm-asm = "uvm.assembler:main"
 uvm-run = "uvm.interpreter:main"
 
 [tool.setuptools]
+package-dir = {"" = "src"}
 packages = ["uvm"]
