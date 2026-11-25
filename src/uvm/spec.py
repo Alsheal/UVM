@@ -55,14 +55,22 @@ ROR_C = Field(name="C", offset=11, width=17)
 
 @dataclass(frozen=True)
 class CommandSpec:
+    """Команда УВМ.
+
+    Операнды перечислены в порядке записи в ассемблере.
+    """
+
     mnemonic: str
     opcode: int
-    operands: tuple[Operand, ...]  # в порядке записи в ассемблере
+    operands: tuple[Operand, ...]
 
     @property
     def fields(self) -> tuple[Field, ...]:
         """Все поля команды в порядке A, B, C (по возрастанию смещения)."""
-        all_fields = (OPCODE_FIELD, *(operand.field for operand in self.operands))
+        all_fields = (
+            OPCODE_FIELD,
+            *(operand.field for operand in self.operands),
+        )
         return tuple(sorted(all_fields, key=lambda field: field.offset))
 
 

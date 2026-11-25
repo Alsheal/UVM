@@ -34,7 +34,9 @@ SPEC_DECODED = (
 
 
 def expected_dump(first: int) -> dict[str, int]:
-    return {str(first + index): value for index, value in enumerate(ARRAY_VALUES)}
+    return {
+        str(first + index): value for index, value in enumerate(ARRAY_VALUES)
+    }
 
 
 def run_source(source: str) -> Machine:
@@ -82,7 +84,9 @@ class ExecutionTest(unittest.TestCase):
     def test_code_memory_is_not_modified_by_execution(self):
         source = COPY_ARRAY_PATH.read_text(encoding=FILE_ENCODING)
         machine = run_source(source)
-        self.assertEqual(machine.code_memory, encode_program(parse_program(source)))
+        self.assertEqual(
+            machine.code_memory, encode_program(parse_program(source))
+        )
 
 
 class DumpRangeTest(unittest.TestCase):
@@ -120,7 +124,9 @@ class CopyArrayCliTest(unittest.TestCase):
         self.assertEqual(self.read_dump(), expected_dump(SOURCE_FIRST))
 
     def test_array_is_copied(self):
-        self.run_interpreter(DESTINATION_FIRST, DESTINATION_FIRST + len(ARRAY_VALUES) - 1)
+        self.run_interpreter(
+            DESTINATION_FIRST, DESTINATION_FIRST + len(ARRAY_VALUES) - 1
+        )
         self.assertEqual(self.read_dump(), expected_dump(DESTINATION_FIRST))
 
     def test_invalid_range_returns_error_and_writes_nothing(self):

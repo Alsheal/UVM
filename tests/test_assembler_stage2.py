@@ -10,7 +10,8 @@ from uvm.listing import format_command
 from uvm.parser import parse_program
 from uvm.spec import COMMAND_SIZE_BYTES
 
-EXAMPLE_PATH = Path(__file__).resolve().parent.parent / "examples" / "spec_tests.asm"
+ROOT_DIRECTORY = Path(__file__).resolve().parent.parent
+EXAMPLE_PATH = ROOT_DIRECTORY / "examples" / "spec_tests.asm"
 OUTPUT_NAME = "program.bin"
 
 SPEC_BYTES = (
@@ -34,13 +35,17 @@ class EncodingTest(unittest.TestCase):
         for source, expected in SPEC_BYTES:
             with self.subTest(source=source):
                 (instruction,) = parse_program(source)
-                self.assertEqual(encode_instruction(instruction), bytes(expected))
+                self.assertEqual(
+                    encode_instruction(instruction), bytes(expected)
+                )
 
     def test_every_command_has_fixed_size(self):
         for source, _ in SPEC_BYTES:
             with self.subTest(source=source):
                 (instruction,) = parse_program(source)
-                self.assertEqual(len(encode_instruction(instruction)), COMMAND_SIZE_BYTES)
+                self.assertEqual(
+                    len(encode_instruction(instruction)), COMMAND_SIZE_BYTES
+                )
 
     def test_command_is_formatted_as_in_specification(self):
         command = bytes(SPEC_BYTES[0][1])

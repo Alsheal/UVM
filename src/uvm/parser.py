@@ -15,7 +15,7 @@ from uvm.spec import (
 COMMENT_PREFIX = ";"
 OPERAND_SEPARATOR = ","
 FIRST_LINE_NUMBER = 1
-NUMBER_BASE_AUTO = 0  # int(x, 0): поддерживает 10, 0x.., 0b..
+NUMBER_BASE_AUTO = 0
 
 REGISTER_PATTERN = re.compile(r"r(\d+)")
 
@@ -32,6 +32,10 @@ def parse_register(token: str) -> int:
 
 
 def parse_number(token: str) -> int:
+    """Разбирает число: десятичное, 0x.. или 0b..
+
+    Основание определяется автоматически (int с основанием 0).
+    """
     try:
         return int(token, NUMBER_BASE_AUTO)
     except ValueError:

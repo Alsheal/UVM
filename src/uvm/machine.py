@@ -13,4 +13,6 @@ DATA_MEMORY_SIZE = READ_C.max_value + 1
 class Machine:
     code_memory: list[bytes]
     registers: Memory = field(default_factory=lambda: Memory(REGISTER_COUNT))
-    data_memory: Memory = field(default_factory=lambda: Memory(DATA_MEMORY_SIZE))
+    data_memory: Memory = field(
+        default_factory=lambda: Memory(DATA_MEMORY_SIZE)
+    )

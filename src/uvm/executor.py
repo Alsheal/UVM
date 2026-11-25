@@ -26,7 +26,9 @@ Handler = Callable[[Machine, dict[str, int]], None]
 
 
 def execute_load_const(machine: Machine, values: dict[str, int]) -> None:
-    machine.registers.write(values[LOAD_CONST_C.name], values[LOAD_CONST_B.name])
+    machine.registers.write(
+        values[LOAD_CONST_C.name], values[LOAD_CONST_B.name]
+    )
 
 
 def execute_read(machine: Machine, values: dict[str, int]) -> None:

@@ -45,12 +45,18 @@ def vector_dump(machine: Machine, first_address: int) -> dict[str, int]:
     return build_dump(machine.data_memory, first_address, last_address)
 
 
-def expected_dump(first_address: int, values: tuple[int, ...]) -> dict[str, int]:
-    return {str(first_address + index): value for index, value in enumerate(values)}
+def expected_dump(
+    first_address: int, values: tuple[int, ...]
+) -> dict[str, int]:
+    return {
+        str(first_address + index): value for index, value in enumerate(values)
+    }
 
 
 def run_example(number: int) -> Machine:
-    source = example_path(EXAMPLES_DIRECTORY, number).read_text(encoding=FILE_ENCODING)
+    source = example_path(EXAMPLES_DIRECTORY, number).read_text(
+        encoding=FILE_ENCODING
+    )
     machine = Machine(code_memory=encode_program(parse_program(source)))
     run(machine)
     return machine
@@ -68,7 +74,9 @@ class VectorExamplesTest(unittest.TestCase):
 
     def test_expected_values_match_alu(self):
         for (vector_a, vector_b), expected in zip(EXAMPLES, EXPECTED_RESULTS):
-            computed = tuple(rotate_right(a, b) for a, b in zip(vector_a, vector_b))
+            computed = tuple(
+                rotate_right(a, b) for a, b in zip(vector_a, vector_b)
+            )
             with self.subTest(vector_a=vector_a):
                 self.assertEqual(computed, expected)
 
@@ -108,7 +116,12 @@ class VectorCliTest(unittest.TestCase):
                 assembler.main([str(source), str(binary)])
             last = FIRST_ADDRESS_RESULT + VECTOR_LENGTH - 1
             arguments = [str(binary), str(dump)]
-            arguments += ["--from", str(FIRST_ADDRESS_RESULT), "--to", str(last)]
+            arguments += [
+                "--from",
+                str(FIRST_ADDRESS_RESULT),
+                "--to",
+                str(last),
+            ]
             with redirect_stderr(io.StringIO()):
                 interpreter.main(arguments)
             result = json.loads(dump.read_text(encoding=FILE_ENCODING))

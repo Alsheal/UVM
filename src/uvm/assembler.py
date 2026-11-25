@@ -15,9 +15,15 @@ SIZE_MESSAGE = "Размер двоичного файла (байт): {size}"
 
 
 def build_argument_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Ассемблер учебной виртуальной машины")
-    parser.add_argument("source", type=Path, help="путь к исходному файлу с программой")
-    parser.add_argument("output", type=Path, help="путь к двоичному файлу-результату")
+    parser = argparse.ArgumentParser(
+        description="Ассемблер учебной виртуальной машины"
+    )
+    parser.add_argument(
+        "source", type=Path, help="путь к исходному файлу с программой"
+    )
+    parser.add_argument(
+        "output", type=Path, help="путь к двоичному файлу-результату"
+    )
     parser.add_argument(
         "--test",
         action="store_true",

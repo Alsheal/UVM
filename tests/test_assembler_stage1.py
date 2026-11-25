@@ -3,7 +3,8 @@ from pathlib import Path
 
 from uvm.parser import AssemblerError, parse_program
 
-EXAMPLE_PATH = Path(__file__).resolve().parent.parent / "examples" / "spec_tests.asm"
+ROOT_DIRECTORY = Path(__file__).resolve().parent.parent
+EXAMPLE_PATH = ROOT_DIRECTORY / "examples" / "spec_tests.asm"
 SOURCE_ENCODING = "utf-8"
 
 SPEC_CASES = (

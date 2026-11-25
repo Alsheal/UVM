@@ -13,8 +13,8 @@ from uvm.machine import Machine
 from uvm.memory import WORD_BITS, WORD_MASK
 from uvm.parser import parse_program
 
-DEMO_PATH = Path(__file__).resolve().parent.parent / "examples" / "ror_demo.asm"
-FILE_ENCODING = "utf-8"
+ROOT_DIRECTORY = Path(__file__).resolve().parent.parent
+DEMO_PATH = ROOT_DIRECTORY / "examples" / "ror_demo.asm"
 
 RESULT_FIRST = 20
 RESULT_LAST = 21
@@ -48,7 +48,9 @@ class RotateRightTest(unittest.TestCase):
         for shift in range(WORD_BITS):
             with self.subTest(shift=shift):
                 rotated = rotate_right(value, shift)
-                self.assertEqual(rotate_right(rotated, WORD_BITS - shift), value)
+                self.assertEqual(
+                    rotate_right(rotated, WORD_BITS - shift), value
+                )
 
 
 class RotateRightCommandTest(unittest.TestCase):

@@ -15,7 +15,9 @@ def shift_field(instruction: Instruction, field: Field) -> int:
 
 
 def pack_word(instruction: Instruction) -> int:
-    shifted = (shift_field(instruction, field) for field in instruction.spec.fields)
+    shifted = (
+        shift_field(instruction, field) for field in instruction.spec.fields
+    )
     return reduce(or_, shifted, EMPTY_WORD)
 
 

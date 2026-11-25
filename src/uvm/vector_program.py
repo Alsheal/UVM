@@ -66,14 +66,18 @@ def check_length(name: str, values: tuple[int, ...]) -> None:
         )
 
 
+def describe_range(label: str, first_address: int) -> str:
+    last_address = first_address + VECTOR_LENGTH - 1
+    return f"; {label}: mem[{first_address}..{last_address}]"
+
+
 def build_source(vector_a: tuple[int, ...], vector_b: tuple[int, ...]) -> str:
     check_length("A", vector_a)
     check_length("B", vector_b)
     lines = [
-        f"; Вектор A: mem[{FIRST_ADDRESS_A}..{FIRST_ADDRESS_A + VECTOR_LENGTH - 1}]",
-        f"; Вектор B: mem[{FIRST_ADDRESS_B}..{FIRST_ADDRESS_B + VECTOR_LENGTH - 1}]",
-        f"; Результат: mem[{FIRST_ADDRESS_RESULT}.."
-        f"{FIRST_ADDRESS_RESULT + VECTOR_LENGTH - 1}]",
+        describe_range("Вектор A", FIRST_ADDRESS_A),
+        describe_range("Вектор B", FIRST_ADDRESS_B),
+        describe_range("Результат", FIRST_ADDRESS_RESULT),
         *init_vector(FIRST_ADDRESS_A, vector_a),
         *init_vector(FIRST_ADDRESS_B, vector_b),
     ]
@@ -90,7 +94,9 @@ def write_examples(directory: Path) -> list[Path]:
     paths = []
     for number, (vector_a, vector_b) in enumerate(EXAMPLES, start=1):
         path = example_path(directory, number)
-        path.write_text(build_source(vector_a, vector_b), encoding=FILE_ENCODING)
+        path.write_text(
+            build_source(vector_a, vector_b), encoding=FILE_ENCODING
+        )
         paths.append(path)
     return paths
 

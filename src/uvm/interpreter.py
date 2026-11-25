@@ -15,15 +15,27 @@ EXIT_ERROR = 1
 
 
 def build_argument_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Интерпретатор учебной виртуальной машины")
-    parser.add_argument("binary", type=Path, help="путь к бинарному файлу программы")
-    parser.add_argument("dump", type=Path, help="путь к файлу дампа памяти (JSON)")
+    parser = argparse.ArgumentParser(
+        description="Интерпретатор учебной виртуальной машины"
+    )
     parser.add_argument(
-        "--from", dest="first", type=int, required=True,
+        "binary", type=Path, help="путь к бинарному файлу программы"
+    )
+    parser.add_argument(
+        "dump", type=Path, help="путь к файлу дампа памяти (JSON)"
+    )
+    parser.add_argument(
+        "--from",
+        dest="first",
+        type=int,
+        required=True,
         help="первый адрес памяти данных для дампа",
     )
     parser.add_argument(
-        "--to", dest="last", type=int, required=True,
+        "--to",
+        dest="last",
+        type=int,
+        required=True,
         help="последний адрес памяти данных для дампа (включительно)",
     )
     return parser
