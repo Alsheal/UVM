@@ -16,3 +16,6 @@ uvm-run = "uvm.interpreter:main"
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = ["uvm"]
+
+[tool.black]
+line-length = 80
